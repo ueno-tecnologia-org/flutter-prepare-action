@@ -1,7 +1,7 @@
 name: 'Flutter prepare action'
 description: 'Get Flutter SDK and get ready to build'
 inputs:
-  version:
+  flutter-version:
     description: 'Flutter version'
     required: true
 runs:
