@@ -8,10 +8,6 @@ jobs:
       # To use this repository's private action,
       # you must check out the repository
       - uses: actions/checkout@v4
-      - name: SSH Agent
-        uses: webfactory/ssh-agent@v0.8.0
-        with:
-          ssh-private-key: ${{ secrets.FRONTEND_CORE_SSH_PRIVATE_KEY }}
       - name: Checkout
         uses: actions/checkout@v3
       - name: Executes flutter-prepare-action
