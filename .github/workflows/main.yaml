@@ -1,0 +1,22 @@
+on: [push]
+
+jobs:
+  test_job:
+    runs-on: ubuntu-latest
+    name: A job to say hello
+    steps:
+      # To use this repository's private action,
+      # you must check out the repository
+      - uses: actions/checkout@v4
+      - name: SSH Agent
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.FRONTEND_CORE_SSH_PRIVATE_KEY }}
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Executes flutter-prepare-action
+        uses: ./ # Uses an action in the root directory
+        id: fpa
+        with:
+            flutter-version: '3.19.2'
+            format-exit-if-changed: false

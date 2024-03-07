@@ -1,0 +1,13 @@
+name: flutter_action
+description: A GitHub Action written in dart.
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  
+dependencies:
+  dio: ^5.4.1
+
+dev_dependencies:
+  test: ^1.25.2
