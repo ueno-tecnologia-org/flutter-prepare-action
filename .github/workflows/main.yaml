@@ -15,4 +15,4 @@ jobs:
         id: fpa
         with:
             flutter-version: '3.19.2'
-            format-exit-if-changed: false
+            format-exits-if-changed: false
