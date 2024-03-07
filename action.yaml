@@ -25,13 +25,13 @@ runs:
       run: flutter pub get
       shell: bash
 
-    if: format-exit-if-changed == 'true'
     - name: Format code (exit)
+      if: format-exit-if-changed == 'true'
       run: dart format --line-length=80 --set-exit-if-changed .
       shell: bash
 
-    if: format-exit-if-changed == 'false'
     - name: Format code (no exit)
+      if: format-exit-if-changed == 'false'
       run: dart format --line-length=80 .
       shell: bash
 
