@@ -4,6 +4,10 @@ inputs:
   flutter-version:
     description: 'Flutter version'
     required: true
+  format-exit-if-changed:
+    description: 'Set exit code to 1 if there are formatting issues'
+    required: false
+    default: false
 runs:
   using: "composite"
   steps:
@@ -21,8 +25,14 @@ runs:
       run: flutter pub get
       shell: bash
 
-    - name: Format code
+    if: format-exit-if-changed == 'true'
+    - name: Format code (exit)
       run: dart format --line-length=80 --set-exit-if-changed .
+      shell: bash
+
+    if: format-exit-if-changed == 'false'
+    - name: Format code (no exit)
+      run: dart format --line-length=80 .
       shell: bash
 
     - name: Analyze code
