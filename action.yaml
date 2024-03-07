@@ -26,12 +26,12 @@ runs:
       shell: bash
 
     - name: Format code (exit)
-      if: ${{ inputs.format-exit-if-changed }} == 'true'
+      if: inputs.format-exit-if-changed == 'true'
       run: dart format --line-length=80 --set-exit-if-changed .
       shell: bash
 
     - name: Format code (no exit)
-      if: ${{ inputs.format-exit-if-changed }} == 'false'
+      if: inputs.format-exit-if-changed == 'false'
       run: dart format --line-length=80 .
       shell: bash
 
