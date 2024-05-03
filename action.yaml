@@ -56,4 +56,5 @@ runs:
         coverage-files: coverage/lcov.info
         minimum-coverage: 0
         artifact-name: code-coverage-report
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+        github-token: "${{ secrets.GITHUB_TOKEN }}"
+        
