@@ -3,13 +3,15 @@ on: [push]
 jobs:
   test_job:
     runs-on: ubuntu-latest
-    name: A job to say hello
+    name: checks
     steps:
       # To use this repository's private action,
       # you must check out the repository
       - uses: actions/checkout@v4
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Print GitHub token
+        run: echo ${{ secrets.GITHUB_TOKEN }}
       - name: Executes flutter-prepare-action
         uses: ./ # Uses an action in the root directory
         id: fpa
