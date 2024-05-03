@@ -2,6 +2,7 @@ on: [push, pull_request]
 
 jobs:
   test_job:
+    permissions: write-all
     runs-on: ubuntu-latest
     name: checks
     steps:
