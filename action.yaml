@@ -11,6 +11,10 @@ inputs:
   github-token:
     description: 'The GitHub token to upload the code coverage report'
     required: true
+  update-coverage-comment: 
+    description: 'Update the coverage comment'
+    required: true
+    default: false
 runs:
   using: "composite"
   steps:
@@ -60,3 +64,4 @@ runs:
         minimum-coverage: 0
         artifact-name: code-coverage-report
         github-token: ${{ inputs.github-token }}
+        update-comment: ${{ inputs.update-coverage-comment }}
