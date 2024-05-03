@@ -54,7 +54,7 @@ runs:
       uses: hrishikesh-kadam/setup-lcov@v1
 
     - name: Report Code Coverage
-      uses: zgosalvez/github-actions-report-lcov@v3
+      uses: zgosalvez/github-actions-report-lcov@v4.1.6
       with:
         coverage-files: coverage/lcov.info
         minimum-coverage: 0
