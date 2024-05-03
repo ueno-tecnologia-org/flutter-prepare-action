@@ -16,3 +16,4 @@ jobs:
         with:
             flutter-version: '3.19.2'
             format-exits-if-changed: false
+            github-token: ${{ secrets.GITHUB_TOKEN }}

@@ -8,6 +8,9 @@ inputs:
     description: 'Set exit code to 1 if there are formatting issues'
     required: false
     default: false
+  github-token:
+    description: 'The GitHub token to upload the code coverage report'
+    required: true
 runs:
   using: "composite"
   steps:
@@ -56,4 +59,4 @@ runs:
         coverage-files: coverage/lcov.info
         minimum-coverage: 0
         artifact-name: code-coverage-report
-        github-token: ${{ github.token }}
+        github-token: ${{ inputs.github-token }}
