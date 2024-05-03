@@ -60,3 +60,4 @@ runs:
         minimum-coverage: 0
         artifact-name: code-coverage-report
         github-token: ${{ inputs.token }}
+        update-comment: true
