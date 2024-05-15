@@ -47,11 +47,6 @@ runs:
       run: flutter analyze
       shell: bash
 
-    - name: Run Tests
-      if: github.event_name == 'push'
-      run: flutter test
-      shell: bash
-    
     - name: Run Flutter Tests
       if: github.event_name == 'pull_request'
       run: flutter test --coverage
