@@ -1,0 +1,27 @@
+name: Security Scan
+on:
+  push:
+    branches:
+      - main
+      - dev*
+      - master
+      - poc/security-*
+jobs:
+  trivy-scan:
+    uses: ueno-tecnologia-org/security-scans/.github/workflows/trivy-scan.yml@main
+    secrets:
+      dd_url: ${{ secrets.DD_URL }}
+      dd_api_token: ${{ secrets.DEFECTDOJO_API_KEY }}
+  checkmarx-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Checkmarx One CLI Action
+        uses: checkmarx/ast-github-action@main
+        with:
+          base_uri: https://us.ast.checkmarx.net/
+          cx_tenant: ${{ secrets.CX_TENANT }}
+          cx_client_id: ${{ secrets.CX_CLIENT_ID }}
+          cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
+          additional_params: --report-format sonar
