@@ -15,43 +15,84 @@ inputs:
     description: 'Update the coverage comment'
     required: true
     default: false
+  use-melos:
+    description: 'Use melos, you must have a melos.yaml file'
+    required: false
+    default: false
+  artifact-name:
+    description: 'Artifact name'
+    required: false
+    default: 'code-coverage-report'
 runs:
   using: "composite"
   steps:
-    # Get Flutter SDK
+    # If use-melos is false
     - uses: subosito/flutter-action@v2
       with:
         flutter-version: ${{ inputs.flutter-version }}
         channel: stable
 
-    - name: Flutter vesion
+    - name: Flutter version
+      if: inputs.use-melos == 'false'
       run: flutter --version
       shell: bash
 
     - name: Install dependencies
+      if: inputs.use-melos == 'false'
       run: flutter pub get
       shell: bash
 
     - name: Format code (exit)
-      if: inputs.format-exits-if-changed == 'true' && github.event_name == 'push'
+      if: inputs.use-melos == 'false' && inputs.format-exits-if-changed == 'true' && github.event_name == 'push'
       run: dart format --line-length=80 --set-exit-if-changed .
       shell: bash
 
     - name: Format code (no exit)
-      if: inputs.format-exits-if-changed == 'false' && github.event_name == 'push'
+      if: inputs.use-melos == 'false' && inputs.format-exits-if-changed == 'false' && github.event_name == 'push'
       run: dart format --line-length=80 .
       shell: bash
-
     - name: Analyze code
-      if: github.event_name == 'push'
+      if: inputs.use-melos == 'false' && github.event_name == 'push'
       run: flutter analyze
       shell: bash
 
     - name: Run Flutter Tests
-      if: github.event_name == 'pull_request'
+      if: inputs.use-melos == 'false' && github.event_name == 'pull_request'
       run: flutter test --coverage
       shell: bash
+      
+    # If use-melos is true
+    - name: Install Melos
+      if: inputs.use-melos == 'true'
+      run: dart pub global activate melos
+      shell: bash
 
+    - name: Melos bootstrap
+      if: inputs.use-melos == 'true'
+      run: melos bootstrap
+      shell: bash
+
+    - name: Melos format (exit)
+      if: inputs.use-melos == 'true' && inputs.format-exits-if-changed == 'true' && github.event_name == 'push'
+      run: melos format --line-length=80 --set-exit-if-changed
+      shell: bash
+
+    - name: Melos format (no exit)
+      if: inputs.use-melos == 'true' && inputs.format-exits-if-changed == 'false' && github.event_name == 'push'
+      run: melos format --line-length=80
+      shell: bash
+
+    - name: Melos analyze
+      if: inputs.use-melos == 'true' && github.event_name == 'push'
+      run: melos analyze
+      shell: bash
+
+    - name: Melos run tests with coverage
+      if: inputs.use-melos == 'true' && github.event_name == 'pull_request'
+      run: melos test_coverage
+      shell: bash
+    
+    # Extract coverage
     - name: Setup LCOV
       if: github.event_name == 'pull_request'
       uses: hrishikesh-kadam/setup-lcov@v1
@@ -62,6 +103,6 @@ runs:
       with:
         coverage-files: coverage/lcov.info
         minimum-coverage: 0
-        artifact-name: code-coverage-report
+        artifact-name: ${{ inputs.artifact-name }}
         github-token: ${{ inputs.github-token }}
         update-comment: ${{ inputs.update-coverage-comment }}
