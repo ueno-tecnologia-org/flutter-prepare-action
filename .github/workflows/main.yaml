@@ -23,14 +23,14 @@ jobs:
         uses: ./ # Uses an action in the root directory
         id: fpa
         with:
-          flutter-version: '3.19.2'
+          flutter-version: '3.22.1'
           format-exits-if-changed: false
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Executes flutter-prepare-action using Melos
         uses: ./ # Uses an action in the root directory
         id: fpa_melos
         with:
-          flutter-version: '3.19.2'
+          flutter-version: '3.22.1'
           format-exits-if-changed: false
           github-token: ${{ secrets.GITHUB_TOKEN }}
           use-melos: true
