@@ -34,3 +34,4 @@ jobs:
           format-exits-if-changed: false
           github-token: ${{ secrets.GITHUB_TOKEN }}
           use-melos: true
+          artifact-name: 'code-coverage-report-melos'
