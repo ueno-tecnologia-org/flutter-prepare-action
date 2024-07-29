@@ -55,7 +55,8 @@ runs:
     - name: Run Flutter Tests
       if: inputs.use-melos == 'false' && github.event_name == 'pull_request'
       run: flutter test --coverage
-
+      shell: bash
+      
     # If use-melos is true
     - name: Install Melos
       if: inputs.use-melos == 'true'
