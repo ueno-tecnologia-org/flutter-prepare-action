@@ -9,14 +9,14 @@
     format-exits-if-changed: true | false # default: false. If true, the action will exit with code 1 if there are any files that need to be formatted.
     github-token: ${{ secrets.GITHUB_TOKEN }} # required
     update-coverage-comment: true | false # default: false. If true, the action will update the coverage comment in the PR.
-    use_melos: true #default: false. If true, the action will use melos to run the flutter commands
+    use-melos: true #default: false. If true, the action will use melos to run the flutter commands
 
 ```
 
 
 ## Using Melos with the Action
 
-To use Melos with this GitHub Action, you need to set the use_melos input to true. This will ensure that Melos commands are used instead of the default Flutter commands. Additionally, you must have a melos.yaml file in your repository's root directory.
+To use Melos with this GitHub Action, you need to set the use-melos input to true. This will ensure that Melos commands are used instead of the default Flutter commands. Additionally, you must have a melos.yaml file in your repository's root directory.
 
 **Example** `melos.yaml`
 
@@ -48,7 +48,7 @@ scripts:
 
 **Action Configuration**
 
-In your GitHub Actions workflow file, set the `use_melos` input to `true`:
+In your GitHub Actions workflow file, set the `use-melos` input to `true`:
 
 ```yaml
 - uses: ueno-tecnologia-org/flutter-prepare-action@v1
@@ -57,7 +57,7 @@ In your GitHub Actions workflow file, set the `use_melos` input to `true`:
     format-exits-if-changed: true | false # default: false. If true, the action will exit with code 1 if there are any files that need to be formatted.
     github-token: ${{ secrets.GITHUB_TOKEN }} # required
     update-coverage-comment: true | false # default: false. If true, the action will update the coverage comment in the PR.
-    use_melos: true #default: false
+    use-melos: true #default: false
 ```
 
-By setting `use_melos` to `true`, the action will use Melos for bootstrapping, formatting, analyzing, and running tests as defined in your `melos.yaml` file.
+By setting `use-melos` to `true`, the action will use Melos for bootstrapping, formatting, analyzing, and running tests as defined in your `melos.yaml` file.
