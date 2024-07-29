@@ -32,7 +32,7 @@ packages:
 
 scripts:
   format:
-    exec: dart format --line-length=80 --set-exit-if-changed .
+    exec: dart format
   gen:
     exec: dart run build_runner build --delete-conflicting-outputs
   loc:

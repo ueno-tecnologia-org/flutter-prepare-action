@@ -69,12 +69,12 @@ runs:
 
     - name: Melos format (exit)
       if: inputs.use_melos == 'true' && inputs.format-exits-if-changed == 'true' && github.event_name == 'push'
-      run: melos format --set-exit-if-changed
+      run: melos format --line-length=80 --set-exit-if-changed
       shell: bash
 
     - name: Melos format (no exit)
       if: inputs.use_melos == 'true' && inputs.format-exits-if-changed == 'false' && github.event_name == 'push'
-      run: melos format
+      run: melos format --line-length=80
       shell: bash
 
     - name: Melos analyze
