@@ -9,7 +9,7 @@
     format-exits-if-changed: true | false # default: false. If true, the action will exit with code 1 if there are any files that need to be formatted.
     github-token: ${{ secrets.GITHUB_TOKEN }} # required
     update-coverage-comment: true | false # default: false. If true, the action will update the coverage comment in the PR.
-    use-melos: true #default: false. If true, the action will use melos to run the flutter commands
+    use-melos: false #default: false. If true, the action will use melos to run the flutter commands
 
 ```
 
