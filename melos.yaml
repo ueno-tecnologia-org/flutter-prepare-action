@@ -1,0 +1,19 @@
+name: MyGithubActionWithMelos
+
+packages:
+  - .
+  - example
+
+scripts:
+  format:
+    exec: dart format
+  gen:
+    exec: dart run build_runner build --delete-conflicting-outputs
+  loc:
+    exec: dart gen-l10n
+  analyze:
+    exec: flutter analyze .
+  test:
+    exec: flutter test
+  test_coverage:
+    exec: flutter test --coverage
